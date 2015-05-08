@@ -47,7 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stock\BigDealBusiness.cs" />
+    <Compile Include="Stock\BigDealSumBusiness.cs" />
     <Compile Include="Stock\BusinessBase.cs" />
+    <Compile Include="Stock\DailyRecordBusiness.cs" />
     <Compile Include="Stock\ISpider.cs" />
     <Compile Include="Stock\NoticeBusiness.cs" />
     <Compile Include="Stock\StockCompanyBusiness.cs" />

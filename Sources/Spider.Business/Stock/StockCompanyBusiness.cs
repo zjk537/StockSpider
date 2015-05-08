@@ -61,7 +61,7 @@ namespace Spider.Business.Stock
                 string[] dataArray = e.Split(',');
                 companyList.Add(new StockCompanyModel()
                 {
-                    StockBourse = dataArray[0].EndsWith("1") ? BourseType.ShangHai : BourseType.ShenZhen,
+                    StockBourse = dataArray[0].EndsWith("1") ? BourseType.SH : BourseType.SZ,
                     StockCode = dataArray[1],
                     CompanyName = dataArray[2],
                     CreatedDate = DateTime.Now
@@ -97,7 +97,7 @@ namespace Spider.Business.Stock
                     URL = this.UrlModel.Url,
                     ContentType = "json"
                 };
-                item.URL = Regex.Replace(item.URL, @"page=\d", "page=1");
+                item.URL = Regex.Replace(item.URL, @"page=\d+", "page=1");
                 string jsonData = helper.GetHtml(item);
                 string newString = jsonData.Substring(jsonData.IndexOf('=') + 1);
                 if (newString.Contains("error"))

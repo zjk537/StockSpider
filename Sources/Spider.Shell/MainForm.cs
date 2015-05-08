@@ -14,7 +14,6 @@ using Spider.Models.Stock;
 using System.Reflection;
 using System.Threading;
 using Spider.Common.Enums;
-using Spider.Business.Stock;
 
 
 namespace Spider.Shell
@@ -40,7 +39,7 @@ namespace Spider.Shell
             //Application.ExitThread(); 强制中止调用线程上的所有消息，同样面临其它线程无法正确退出的问题；
             //System.Environment.Exit(0);   这是最彻底的退出方式，不管什么线程都被强制退出，把程序结束的很干净。
             UrlBusiness business = new UrlBusiness();
-            business.UpdateWorkingUrlStatus();
+            business.UpdateWorkingUrlStatus(ProcessState.Abort);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -67,8 +66,26 @@ namespace Spider.Shell
 
         private void btnAddUrl_Click(object sender, EventArgs e)
         {
-            AddUrlForm urlForm = new AddUrlForm();
+            UrlForm urlForm = new UrlForm();
+            urlForm.FormClosed += urlForm_FormClosed;
             urlForm.ShowDialog();
+        }
+
+        private void btnShowNotice_Click(object sender, EventArgs e)
+        {
+            NoticeForm form = new NoticeForm();
+            form.ShowDialog();
+        }
+
+        /// <summary>
+        /// 维护数据库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDB_Click(object sender, EventArgs e)
+        {
+            ManageDBForm form = new ManageDBForm();
+            form.ShowDialog();
         }
 
         private void gridSourceUrl_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -113,11 +130,10 @@ namespace Spider.Shell
                 return;
 
             DataGridView view = (DataGridView)sender;
-
             if (e.ColumnIndex == view.Columns["clmOperate"].Index)
             {
-                var dgCell = view.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 var rowData = (SourceUrlModel)view.Rows[e.RowIndex].DataBoundItem;
+                var dgCell = view.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (rowData.State == (int)ProcessState.Processing)
                 {
                     SpiderAbort(e.RowIndex, rowData);
@@ -132,8 +148,26 @@ namespace Spider.Shell
                 }
                 this.gridSourceUrl.UpdateCellValue(view.Columns["clmState"].Index, e.RowIndex);
             }
+
+        }
+        private void gridSourceUrl_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e == null || !(sender is DataGridView))
+                return;
+            DataGridView view = (DataGridView)sender;
+            if (e.ColumnIndex == view.Columns["clmUrl"].Index || e.ColumnIndex == view.Columns["clmUrlType"].Index || e.ColumnIndex == view.Columns["clmRemark"].Index)
+            {
+                var rowData = (SourceUrlModel)view.Rows[e.RowIndex].DataBoundItem;
+                UrlForm urlForm = new UrlForm(rowData);
+                urlForm.FormClosed += urlForm_FormClosed;
+                urlForm.ShowDialog();
+            }
         }
 
+        void urlForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            BindSourceUrlGrid();
+        }
         #endregion
 
 
@@ -207,20 +241,10 @@ namespace Spider.Shell
                 return;
             }
 
-            switch (urlModel.UrlType)
-            {
-                case UrlType.BasicUrl:
-                    spider = new StockCompanyBusiness();
-                    break;
-                case UrlType.NoticeUrl:
-                    spider = new NoticeBusiness();
-                    break;
-                case UrlType.TradeUrl:
-
-                    break;
-                default:
-                    break;
-            }
+            Assembly ass = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "Spider.Business.dll");
+            string handleName = string.Format("Spider.Business.Stock.{0}", urlModel.Handle);
+            Type handleType = ass.GetType(handleName);
+            spider = (ISpider)Activator.CreateInstance(handleType);
             if (spider != null)
             {
                 dictSpider.Add(rowIndex, spider);
@@ -235,14 +259,5 @@ namespace Spider.Shell
             spider.SpiderAbort();
 
         }
-        private void btnShowNotice_Click(object sender, EventArgs e)
-        {
-            NoticeForm form = new NoticeForm();
-            form.ShowDialog();
-        }
-
-
     }
-
-
 }

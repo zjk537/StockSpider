@@ -8,14 +8,26 @@ namespace Spider.Models.Stock
 {
     public enum UrlType
     {
+        /// <summary>
+        /// 基础数据
+        /// </summary>
         [UrlDesc("基础数据")]
         BasicUrl = 1,
-        [UrlDesc("交易数据")]
+        /// <summary>
+        /// 实时数据
+        /// </summary>
+        [UrlDesc("实时数据")]
         TradeUrl = 2,
+        /// <summary>
+        /// 公司消息
+        /// </summary>
         [UrlDesc("公司消息")]
         NoticeUrl = 3,
-        [UrlDesc("大单交易名细")]
-        DealDetailUrl = 4
+        /// <summary>
+        /// 大单交易
+        /// </summary>
+        [UrlDesc("大单交易")]
+        BigDealUrl = 4
     }
 
     [AttributeUsage(AttributeTargets.Field)]

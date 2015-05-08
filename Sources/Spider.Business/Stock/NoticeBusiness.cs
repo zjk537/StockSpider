@@ -22,7 +22,7 @@ namespace Spider.Business.Stock
         ///  爬取网络数据，获取公司分红信息
         /// </summary>
         /// <param name="objCompany">当前公司对象</param>
-        public override void SpiderData(int companyIndex)
+        public override void SpideData(int companyIndex)
         {
             var companyModel = base.CompanyList[companyIndex];
             SyncUILog(ProcessState.Processing, string.Format("开始下载 {0}【{1}】的公司分红信息...-- {2}", companyModel.CompanyName, companyModel.StockCode, companyIndex));

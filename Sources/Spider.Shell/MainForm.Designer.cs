@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnDB = new System.Windows.Forms.Button();
             this.btnShowNotice = new System.Windows.Forms.Button();
             this.btnAddUrl = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -45,6 +46,8 @@
             this.clmRemark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmOperate = new System.Windows.Forms.DataGridViewButtonColumn();
             this.clmState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClCreatedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -54,6 +57,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.btnRefresh);
+            this.panel1.Controls.Add(this.btnDB);
             this.panel1.Controls.Add(this.btnShowNotice);
             this.panel1.Controls.Add(this.btnAddUrl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -71,6 +75,16 @@
             this.btnRefresh.Text = "刷新";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnDB
+            // 
+            this.btnDB.Location = new System.Drawing.Point(20, 39);
+            this.btnDB.Name = "btnDB";
+            this.btnDB.Size = new System.Drawing.Size(93, 21);
+            this.btnDB.TabIndex = 5;
+            this.btnDB.Text = "整理数据库";
+            this.btnDB.UseVisualStyleBackColor = true;
+            this.btnDB.Click += new System.EventHandler(this.btnDB_Click);
             // 
             // btnShowNotice
             // 
@@ -139,7 +153,9 @@
             this.clmUrlType,
             this.clmRemark,
             this.clmOperate,
-            this.clmState});
+            this.clmState,
+            this.Column1,
+            this.ClCreatedDate});
             this.gridSourceUrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridSourceUrl.Location = new System.Drawing.Point(0, 0);
             this.gridSourceUrl.Name = "gridSourceUrl";
@@ -148,6 +164,7 @@
             this.gridSourceUrl.Size = new System.Drawing.Size(711, 380);
             this.gridSourceUrl.TabIndex = 6;
             this.gridSourceUrl.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridSourceUrl_CellContentClick);
+            this.gridSourceUrl.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridSourceUrl_CellContentDoubleClick);
             this.gridSourceUrl.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridSourceUrl_CellFormatting);
             // 
             // clmUrlId
@@ -199,6 +216,22 @@
             this.clmState.Name = "clmState";
             this.clmState.ReadOnly = true;
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Handle";
+            this.Column1.HeaderText = "处理程序";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // ClCreatedDate
+            // 
+            this.ClCreatedDate.DataPropertyName = "CreatedDate";
+            this.ClCreatedDate.HeaderText = "创建时间";
+            this.ClCreatedDate.Name = "ClCreatedDate";
+            this.ClCreatedDate.ReadOnly = true;
+            this.ClCreatedDate.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -210,7 +243,7 @@
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "股票筛选控制台";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -231,12 +264,15 @@
         private System.Windows.Forms.ListBox listLog;
         private System.Windows.Forms.Button btnShowNotice;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnDB;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmUrlId;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmUrl;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmUrlType;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmRemark;
         private System.Windows.Forms.DataGridViewButtonColumn clmOperate;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClCreatedDate;
 
     }
 }

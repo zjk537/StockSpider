@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stock\DealModel.cs" />
+    <Compile Include="Stock\BigDealModel.cs" />
+    <Compile Include="Stock\BigDealSumModel.cs" />
+    <Compile Include="Stock\DailyRecordModel.cs" />
     <Compile Include="Stock\NoticeModel.cs" />
     <Compile Include="Stock\SourceUrlModel.cs" />
     <Compile Include="Stock\StockCompanyModel.cs" />

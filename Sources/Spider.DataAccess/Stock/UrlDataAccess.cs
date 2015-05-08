@@ -15,18 +15,24 @@ namespace Spider.DataAccess.Stock
                                 Url,
                                 Type,
                                 state,
-                                Remark
+                                Remark,
+                                Handle,
+                                CreatedDate
                             ) values (
                                 @Url,
                                 @Type,
                                 1,
-                                @Remark
+                                @Remark,
+                                @Handle,
+                                @CreatedDate
                             )";
             object[] sqlParams = new object[]
                 {
                    urlModel.Url,
                    (int)urlModel.UrlType,
-                   urlModel.Remark
+                   urlModel.Remark,
+                   urlModel.Handle,
+                   DateTime.Now.ToString("yyyy-MM-ss hh:mm:ss")
                 };
             SQLiteHelper.Instance.ExecuteNonQuery(sql, sqlParams);
         }
@@ -45,6 +51,27 @@ namespace Spider.DataAccess.Stock
             SQLiteHelper.Instance.ExecuteNonQuery(sql, sqlParams);
         }
 
+        public void UpdateUrl(SourceUrlModel urlModel)
+        {
+            string sql = @"update SourceUrl 
+                           set  Url = @Url,
+                                Type = @UrlType,
+                                Remark = @Remark,
+                                Handle = @Handle
+                           where 
+                            UrlId = @id;";
+            object[] sqlParams = new object[]
+                {
+                   urlModel.Url,
+                   (int)urlModel.UrlType,
+                   urlModel.Remark,
+                   urlModel.Handle,
+                   urlModel.UrlId
+                };
+
+            SQLiteHelper.Instance.ExecuteNonQuery(sql, sqlParams);
+        }
+
         /// <summary>
         /// get urls byt url type
         /// </summary>
@@ -56,7 +83,9 @@ namespace Spider.DataAccess.Stock
                                 Url,
                                 Type,
                                 State,
-                                Remark
+                                Remark,
+                                Handle,
+                                CreatedDate
                             from SourceUrl
                             where
                             Type = @Type";
@@ -74,7 +103,9 @@ namespace Spider.DataAccess.Stock
                     Url = reader["Url"].ToString(),
                     UrlType = (UrlType)Convert.ToInt32(reader["Type"]),
                     State = Convert.ToInt32(reader["State"]),
-                    Remark = reader["Remark"].ToString()
+                    Remark = reader["Remark"].ToString(),
+                    Handle = reader["Handle"].ToString(),
+                    CreatedDate = Convert.ToDateTime(reader["CreatedDate"])
                 });
             }
             return sourceUrls;
@@ -90,7 +121,9 @@ namespace Spider.DataAccess.Stock
                                 Url,
                                 Type,
                                 State,
-                                Remark
+                                Remark,
+                                Handle,
+                                CreatedDate
                             from SourceUrl";
             var reader = SQLiteHelper.Instance.ExecuteReader(sql);
             List<SourceUrlModel> sourceUrls = new List<SourceUrlModel>();
@@ -102,20 +135,25 @@ namespace Spider.DataAccess.Stock
                     Url = reader["Url"].ToString(),
                     UrlType = (UrlType)Convert.ToInt32(reader["Type"]),
                     State = Convert.ToInt32(reader["State"]),
-                    Remark = reader["Remark"].ToString()
+                    Remark = reader["Remark"].ToString(),
+                    Handle = reader["Handle"].ToString(),
+                    CreatedDate = Convert.ToDateTime(reader["CreatedDate"])
                 });
             }
             return sourceUrls;
         }
 
-        public void UpdateWorkingUrlStatus()
+        public void UpdateWorkingUrlStatus(int state)
         {
             string sql = @"update SourceUrl 
-                           set State = 3
+                           set State = @State
                            where 
                             State = 2;";
-            
-            SQLiteHelper.Instance.ExecuteNonQuery(sql);
+            object[] sqlParams = new object[]
+                {
+                   state
+                };
+            SQLiteHelper.Instance.ExecuteNonQuery(sql, sqlParams);
         }
     }
 }

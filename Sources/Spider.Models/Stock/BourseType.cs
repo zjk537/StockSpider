@@ -14,11 +14,11 @@ namespace Spider.Models.Stock
         /// <summary>
         /// 1--上海
         /// </summary>
-        ShangHai = 1,
+        SH = 1,
 
         /// <summary>
         /// 2--深圳
         /// </summary>
-        ShenZhen = 2
+        SZ = 2
     }
 }

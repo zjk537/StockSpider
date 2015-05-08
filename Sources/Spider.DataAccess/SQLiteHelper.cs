@@ -86,7 +86,7 @@ namespace Spider.DataAccess
             List<SQLiteParameter> cmdParams = this.DeriveParameters(sql, parameters);
             if (cmdParams != null)
             {
-                foreach (var param in this.DeriveParameters(sql, parameters))
+                foreach (var param in cmdParams)
                 {
                     cmd.Parameters.Add(param);
                 }
@@ -156,6 +156,7 @@ namespace Spider.DataAccess
                         param.Value = Convert.ToDateTime(obj);
                         break;
                     case "System.Double":
+                    case "System.Single":
                         param.DbType = DbType.Double;
                         param.Value = Convert.ToDouble(obj);
                         break;

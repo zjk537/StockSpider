@@ -69,11 +69,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddUrlForm.cs">
+    <Compile Include="ManageDBForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddUrlForm.Designer.cs">
-      <DependentUpon>AddUrlForm.cs</DependentUpon>
+    <Compile Include="ManageDBForm.Designer.cs">
+      <DependentUpon>ManageDBForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UrlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UrlForm.Designer.cs">
+      <DependentUpon>UrlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NoticeForm.cs">
       <SubType>Form</SubType>
@@ -89,8 +95,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddUrlForm.resx">
-      <DependentUpon>AddUrlForm.cs</DependentUpon>
+    <EmbeddedResource Include="ManageDBForm.resx">
+      <DependentUpon>ManageDBForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UrlForm.resx">
+      <DependentUpon>UrlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NoticeForm.resx">
       <DependentUpon>NoticeForm.cs</DependentUpon>

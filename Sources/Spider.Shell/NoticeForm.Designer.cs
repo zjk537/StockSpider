@@ -46,16 +46,16 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(719, 51);
+            this.panel1.Size = new System.Drawing.Size(719, 47);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.gridNotice);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 51);
+            this.panel2.Location = new System.Drawing.Point(0, 47);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(719, 462);
+            this.panel2.Size = new System.Drawing.Size(719, 427);
             this.panel2.TabIndex = 1;
             // 
             // gridNotice
@@ -73,7 +73,7 @@
             this.gridNotice.Location = new System.Drawing.Point(0, 0);
             this.gridNotice.Name = "gridNotice";
             this.gridNotice.ReadOnly = true;
-            this.gridNotice.Size = new System.Drawing.Size(719, 462);
+            this.gridNotice.Size = new System.Drawing.Size(719, 427);
             this.gridNotice.TabIndex = 0;
             // 
             // clmStockCode
@@ -94,7 +94,7 @@
             // clmDate
             // 
             this.clmDate.DataPropertyName = "Date";
-            this.clmDate.HeaderText = "日期";
+            this.clmDate.HeaderText = "除权日期";
             this.clmDate.Name = "clmDate";
             this.clmDate.ReadOnly = true;
             // 
@@ -116,9 +116,9 @@
             // 
             // NoticeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 513);
+            this.ClientSize = new System.Drawing.Size(719, 474);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

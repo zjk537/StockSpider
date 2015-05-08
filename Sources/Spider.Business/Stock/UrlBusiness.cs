@@ -35,9 +35,14 @@ namespace Spider.Business.Stock
         /// <summary>
         /// update all processing and abort urls
         /// </summary>
-        public void UpdateWorkingUrlStatus()
+        public void UpdateWorkingUrlStatus(ProcessState state)
         {
-            dataAccess.UpdateWorkingUrlStatus();
+            dataAccess.UpdateWorkingUrlStatus((int)state);
+        }
+
+        public void UpdateUrl(SourceUrlModel urlModel)
+        {
+            dataAccess.UpdateUrl(urlModel);
         }
     }
 }

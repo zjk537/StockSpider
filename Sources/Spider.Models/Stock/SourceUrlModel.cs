@@ -13,5 +13,9 @@ namespace Spider.Models.Stock
         public UrlType UrlType { get; set; }
         public int State { get; set; }
         public string Remark { get; set; }
+
+        public string Handle { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }

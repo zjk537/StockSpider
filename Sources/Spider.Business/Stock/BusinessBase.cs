@@ -157,7 +157,7 @@ namespace Spider.Business.Stock
                     // 非 处理中 状态，代表 UI点击暂停或已爬完数据
                     if (State != ProcessState.Processing) break;
                     if (listIndex >= this.CompanyList.Count) break;
-                    SpiderData(listIndex++);
+                    SpideData(listIndex++);
                 }
             }
 
@@ -175,7 +175,7 @@ namespace Spider.Business.Stock
         /// 采集数据，调用网络接口，开始爬取数据
         /// </summary>
         /// <param name="companyModel">公司信息对象</param>
-        public virtual void SpiderData(int companyIndex)
+        public virtual void SpideData(int companyIndex)
         {
             throw new Exception("The method SpiderData is not override.");
         }
@@ -220,6 +220,16 @@ namespace Spider.Business.Stock
             {
                 SyncLog(this.UrlModel.UrlId, state, message);
             }
+        }
+
+
+
+
+
+        public void ClearExpireData(string[] tableNames)
+        {
+            BaseDataAccess baseDataAccess = new BaseDataAccess();
+            baseDataAccess.TruncateTables(tableNames);
         }
 
     }

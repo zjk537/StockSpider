@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider.Shell", "Spider.Shell\Spider.Shell.csproj", "{ACB1C916-EBB3-4A82-8D7C-DF50FC9D933A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spider.DataAccess", "Spider.DataAccess\Spider.DataAccess.csproj", "{BFD43229-3E73-416E-B218-0ADCFA5CDF94}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependence", "Dependence", "{65707923-06AA-48BC-AEFC-F44286746CED}"
 	ProjectSection(SolutionItems) = preProject
+		Dependence\log4net.config = Dependence\log4net.config
+		Dependence\log4net.dll = Dependence\log4net.dll
 		Dependence\Newtonsoft.Json.dll = Dependence\Newtonsoft.Json.dll
+		Dependence\Stock-Struct.db = Dependence\Stock-Struct.db
 		Dependence\System.Data.SQLite.DLL = Dependence\System.Data.SQLite.DLL
 	EndProjectSection
 EndProject
